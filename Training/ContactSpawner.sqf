@@ -18,9 +18,11 @@ _Units = [
 ];
 private ["_Unit"];
 
-While {!triggerActivated _Trigger} do {
+_startTime = serverTime;
 
-	if(triggerActivated _Trigger) exitWith {false};
+While {!(triggerActivated _Trigger)} do {
+
+	if(triggerActivated _Trigger  || (serverTime > (_startTime + 180))) exitWith {false};
 	sleep (round random _Interval);
 	if(!triggerActivated _Trigger) then {
 		_Group = createGroup EAST;
